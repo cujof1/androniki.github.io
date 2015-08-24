@@ -64,5 +64,223 @@ Write your email:
 
 <h2>And the cloudsound of the week is:</h2>
 <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/216846955&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+
+<!-- Mapping -->
+
+<h1> I have traveled around many cities in the past and I would like to share them with you.</h1>
+<dl id="map">
+	<dt><a href="http://en.wikipedia.org/wiki/Tokyo" class="location" id="location01">Tokyo, Japan</a></dt>
+	<dd>
+		<img src="https://voulezvousdiner.a.cdnify.io/photos/_places/places.tokyo.jpg" width="100" height="75" alt="Photograph of the city of Tokyo, Japan" />
+		<strong>Tokyo, Japan</strong> the most populated city in the world, with a population of 28025000 people.
+	</dd>
+	
+	<dt><a href="https://en.wikipedia.org/wiki/Amsterdam" class="location" id="location02">Amsterdam, The Netherlands</a></dt>
+	<dd>
+		<img src="http://picsburst.com/wp-content/uploads/2013/11/amsterdam.jpg" width="75" height="100" alt="Photograph of the city of Amsterdam, The Netherlands" />
+		<strong>Amsterdam, The Netherlands</strong> the  the capital city and most populous city of the Kingdom of the Netherlands, with a population of 15905200 people.
+	</dd>
+	
+	<dt><a href="https://en.wikipedia.org/wiki/Paris" class="location" id="location03">Paris, France</a></dt>
+	<dd>
+		<img src="http://www.climate-kic.org/wp-content/uploads/2014/10/paris.png" width="100" height="81" alt="Photograph of the city of Paris, France" />
+		<strong>Paris, France</strong>  is the capital and most-populous city of France. Situated on the Seine River has a population of 12005077 people.
+	</dd>
+	
+	<dt><a href="https://en.wikipedia.org/wiki/Istanbul" class="location" id="location04">Instanbul, Turkey</a></dt>
+	<dd>
+		<img src="http://images7.alphacoders.com/436/436873.jpg" width="100" height="85" alt="Photograph of the city of Istanbul, Turkey" />
+		<strong>Istanbul, Turkey</strong>  is the largest city in Turkey, and the country's economic, cultural, and historical center with a population around 14001000 people.
+	</dd>
+	
+	<dt><a href="https://en.wikipedia.org/wiki/London" class="location" id="location05">London, UK</a></dt>
+	<dd>
+		<img src="http://www.thriftytraveler.com/wp-content/uploads/2015/06/london_wallpaper_westminster_3840x2160.jpg" width="100" height="64" alt="Photograph of the city of New York City, USA" />
+		<strong>London, UK</strong>  is the capital and most populous city of England and the United Kingdom, with a population of 13789000 people.
+	</dd>
+	
+	<dt><a href="http://en.wikipedia.org/wiki/Shanghai%2C_China" class="location" id="location06">Shanghai, China</a></dt>
+	<dd>
+		<img src="http://hostelblog.hostelrocket.com/wp-content/uploads/2014/11/Shanghai5.jpg" width="100" height="80" alt="Photograph of the city of Shanghai, China" />
+		<strong>Shanghai, China</strong> situated on the banks of the Yangtze River has a city population of 14173000, making it the sixth most populated city.
+	</dd>
+	
+	<dt><a href="http://en.wikipedia.org/wiki/Lagos%2C_Nigeria" class="location" id="location07">Lagos, Nigeria</a></dt>
+	<dd>
+		<img src="https://dilemmaxdotnet.files.wordpress.com/2012/06/lagos-nigeria-city-07.jpg" width="100" height="80" alt="Photograph of the city of Lagos, Nigeria" />
+		<strong>Lagos, Nigeria</strong> has the seventh largest city population with 13488000 people.
+	</dd>
+	
+	<dt><a href="http://en.wikipedia.org/wiki/Los_Angeles" class="location" id="location08">Los Angeles, USA</a></dt>
+	<dd>
+		<img src="http://www.thefulllane.com/wp-content/uploads/2014/02/Los-Angeles-3.jpg" width="100" height="67" alt="Photograph of the city of Los Angeles, USA" />
+		<strong>Los Angeles, USA</strong> has the eighth largest city population with 13129000 people.
+	</dd>
+	
+	<dt><a href="http://en.wikipedia.org/wiki/Calcutta%2C_India" class="location" id="location09">Calcutta, India</a></dt>
+	<dd>
+		<img src="http://www.rahelsjewishindia.com/page5/page16/files/bazaar3.jpg" width="80" height="94" alt="Photograph of the city of Kolkata, India" />
+		<strong>Kolkata, India</strong> with a population of 12900000 it is the ninth most populous city in the world.
+	</dd>
+	
+	<dt><a href="http://en.wikipedia.org/wiki/Buenos_Aires" class="location" id="location10">Buenos Aires, Argentina</a></dt>
+	<dd>
+		<img src="http://www.fourseasons.com/content/dam/fourseasons/images/web/BUE/BUE_043_1280x486.jpg/jcr:content/renditions/cq5dam.web.1280.1280.jpeg" width="100" height="75" alt="Photograph of the city of Kolkata, India" />
+		<strong>Buenos Aires, Argentina</strong> has the tenth largest city population of 12431000 people.
+	</dd>
+	
+</dl>
+
+
+<script>
+/* A More Accessible Map */
+	
+var mapMaker = {
+	offsetX: -16, // tooltip X offset
+	offsetY: 16,  // tooltip Y offset
+	element: false,
+	DLs:     false,
+	DTs:     false,
+	on:      false,
+	/* constructor - sets events */
+	init: function(){
+		var i=0;
+		var ii=0;
+		var currentLocation = 0;
+		mapMaker.DLs = document.getElementsByTagName('dl');
+		mapMaker.DTs = document.getElementsByTagName('dt');
+		// only loop thru items once
+		if( mapMaker.on == false ){
+			//loop through each DL on page
+			while (mapMaker.DLs.length > i) {
+				//only affect DLs with a class of 'map'
+				if (mapMaker.DLs[i].className == 'map'){
+					//change map DL class, this way map is text only without javascript enabled
+					mapMaker.DLs[i].className = 'map on';
+					//remove any white space
+					mapMaker.stripWhitespace(mapMaker.DLs[i]);
+					mapMaker.stripWhitespace(mapMaker.DTs[i]);
+					// loop thru all DT elements
+					while (mapMaker.DTs.length > ii){
+						//current Location
+						currentLocation = mapMaker.DTs[ii].firstChild;
+						// add events to links
+						mapMaker.addEvt(currentLocation,'mouseover',mapMaker.showTooltip);//displays tooltip on mouse over
+						mapMaker.addEvt(currentLocation,'mouseout',mapMaker.hideTooltip);//hide tooltip on mouse out
+						mapMaker.addEvt(currentLocation,'focus',mapMaker.showTooltip);//display tooltip on focus, for added keyboard accessibility
+						mapMaker.addEvt(currentLocation,'blur',mapMaker.hideTooltip);//hide tooltip on focus, for added keyboard accessibility
+						ii++;
+					};
+					ii=0;
+				};
+				i++;
+			};
+			mapMaker.on = true;
+		};
+	},
+	/* SHOW TOOLTIP */
+	showTooltip: function() {
+		var evt = this;
+		var i = 0;
+		//Find DD to display - based on currently hovered anchor move to parent DT then next sibling DD
+		var objid = evt.parentNode.nextSibling;
+		mapMaker.element = objid;//set for the hideTooltip
+		//get width and height of background map
+		var mapWidth  = objid.parentNode.offsetWidth;
+		var mapHeight = objid.parentNode.offsetHeight;
+		//get width and height of the DD
+		var toopTipWidth = objid.offsetWidth;
+		var toopTipHeight = objid.offsetHeight;
+		//figure out where tooltip should be places based on point location
+		var newX = evt.offsetLeft + mapMaker.offsetX;
+		var newY = evt.offsetTop + mapMaker.offsetY;
+		//check if tooltip fits map width 
+		if ((newX + toopTipWidth) > mapWidth) {
+			objid.style.left = newX-toopTipWidth-24 + 'px';
+		} else {
+			objid.style.left = newX + 'px';
+		};
+		//check if tooltip fits map height 
+		if ((newY + toopTipHeight) > mapHeight) {
+			objid.style.top = newY-toopTipHeight-14 + 'px';
+		} else {
+			objid.style.top = newY + 'px';
+		};
+	},
+	/* HIDE TOOLTIP */
+	hideTooltip: function() {
+		mapMaker.element.style.left = '-9999px';
+	},
+	addEvt: function(element, type, handler) {
+		// assign each event handler a unique ID
+		if (!handler.$$guid) handler.$$guid = mapMaker.addEvt.guid++;
+		// create a hash table of event types for the element
+		if (!element.events) element.events = {};
+		// create a hash table of event handlers for each element/event pair
+		var handlers = element.events[type];
+		if (!handlers) {
+			handlers = element.events[type] = {};
+			// store the existing event handler (if there is one)
+			if (element["on" + type]) {
+				handlers[0] = element["on" + type];
+			};
+		};
+		// store the event handler in the hash table
+		handlers[handler.$$guid] = handler;
+		// assign a global event handler to do all the work
+		element["on" + type] = mapMaker.handleEvent;
+	},
+	handleEvent: function(event) {
+		var returnValue = true;
+		// grab the event object (IE uses a global event object)
+		event = event || mapMaker.fixEvent(window.event);
+		// get a reference to the hash table of event handlers
+		var handlers = this.events[event.type];
+		// execute each event handler
+		for (var i in handlers) {
+			this.$$handleEvent = handlers[i];
+			if (this.$$handleEvent(event) === false) {
+				returnValue = false;
+			};
+		};
+		return returnValue;
+	},
+	fixEvent: function(event) {
+		// add W3C standard event methods
+		event.preventDefault = mapMaker.fixEvent.preventDefault;
+		event.stopPropagation = mapMaker.fixEvent.stopPropagation;
+		return event;
+	},
+	stripWhitespace: function( el ){
+		for(var i = 0; i < el.childNodes.length; i++){
+			var node = el.childNodes[i];
+			if( node.nodeType == 3 && !/\S/.test(node.nodeValue)) {
+				node.parentNode.removeChild(node);
+			};
+		};
+	}
+};
+mapMaker.fixEvent.preventDefault = function() {this.returnValue = false;};
+mapMaker.fixEvent.stopPropagation = function() {this.cancelBubble = true;};
+mapMaker.addEvt.guid = 1;
+
+
+/* LOAD SCRIPT */
+	/* for Mozilla */
+		if (document.addEventListener) {
+			document.addEventListener("DOMContentLoaded", mapMaker.init, null);
+		};
+		
+	/* for Internet Explorer */
+		/*@cc_on @*/
+		/*@if (@_win32)
+			document.write("<script defer src=ie_onload.js><"+"/script>");
+		/*@end @*/
+		
+	/* for other browsers */
+		mapMaker.addEvt( window, 'load', mapMaker.init);
+
+</script>
+
 </body>
 </html>

@@ -46,3 +46,66 @@ ul#tabs li a {
 ul#tabs li a:hover {
     background-color: orange;
 }
+
+dl.map {
+background: url(worldmap.png) no-repeat;
+border: 1px solid #999;
+margin: 0px;
+padding: 0px;
+text-align:left;
+width: 550px;
+height: 275px;
+position: relative;
+}
+
+dl.map dt {
+display: inline;
+}
+
+dl.map dd {
+background: #555;
+border: 2px solid #222;
+border-radius: 8px; /* CSS3 rounded corners */
+-moz-border-radius: 8px; /* Mozilla rounded corners */
+color: #fff;
+padding: 4px;
+width: 200px;
+position: absolute;
+left: -9999px;
+z-index: 11;
+}
+
+dl.map a.location {
+background: url(point.png) no-repeat;
+display: block;
+outline: none;
+text-decoration: none;
+text-indent: -9999px;
+width: 10px;
+height: 10px;
+position: absolute;
+z-index: 10;
+}
+dl.map a.location:hover {
+background: url(point-hover.png) no-repeat -1px -1px;
+}
+
+dl.map a#shanghai {
+top: 80px;
+left: 484px;
+}
+dl.map a#tokyo {
+top: 105px;
+left: 121px;
+}
+
+dl.map.on {
+background: url(worldmap.png) no-repeat;
+border: 1px solid #999;
+margin: 0px;
+padding: 0px;
+text-align:left;
+width: 550px;
+height: 275px;
+position: relative;
+}
