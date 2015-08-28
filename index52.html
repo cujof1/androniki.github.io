@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>jQurey</title>
+	<script src="jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('button').click(function(){
+				var animal=$(this).text();
+				console.log(animal)
+
+				//Returns randoms media 
+				// var instagramURL = "https://api.instagram.com/v1/tags/nofilter/media/recent?client_id=d64ce82470e84e2fa411583c557ed234";
+				//Returns all the popular media
+				// var instagramURL = "https://api.instagram.com/v1/media/popular?access_token=362069550.d64ce82.40db8901d0c14d558c8f229fe275b5ea";
+					// Returns all the specified by location media with a radius of 200m (default is 1km)
+				var instagramURL = "https://api.instagram.com/v1/media/search?lat=37.987196&lng=23.754161&distance=200&access_token=362069550.d64ce82.40db8901d0c14d558c8f229fe275b5ea";
+
+				// Lets try it out with location id 406635086 to Get information about it..DOESNT WORK!
+				// var instagramURL = "https://api.instagram.com/v1/locations/location-id=406635086?access_token=362069550.d64ce82.40db8901d0c14d558c8f229fe275b5ea";
+				console.log(instagramURL);
+
+				
+				$.ajax({
+					url: instagramURL,
+					dataType: 'jsonp',
+					data:{
+						tags: animal,
+						format:'json'},
+					success: function(instagramData){
+						console.log(instagramData.data)
+						var htmlImage="";
+						var newarray=[]
+						var resultsArray=instagramData.data
+						 for (var i=0;i<resultsArray.length;i++){
+            		var track=resultsArray[i].images.standard_resolution.url;
+                     console.log(track);
+            		htmlImage+="<img src='"+track+"'><br>";
+            		newarray.push(track);	
+            	}
+            	
+            	console.log(newarray);
+            	
+                  $("#searchResults").append(htmlImage);
+
+
+                  $("button").click(function() {
+					$("ul").empty();
+				})
+
+
+
+					}
+				})
+			});
+		
+
+		// User id of Angela Merkel is 1753457367 bundeskanzlerin
+var instagramUserfollows = "https://api.instagram.com/v1/users/1753457367/follows?access_token=362069550.d64ce82.40db8901d0c14d558c8f229fe275b5ea"
+console.log("This user is following:"+instagramUserfollows);
+
+		});
+	</script>
+</head>
+<body>
+	<h2> Hellow User </h2>
+	<h3> Do you like animals? </h3>
+	<button id="horseButton" value="Search" >Horse </button>
+	<button id="dogButton" value="Search" >Dog </button>
+	<button id="butterflyButton" value="Search" >Butterfly </button>
+	<button id="lionButton" value="Search" >Lion </button>
+	<button id="pandaButton" value="Search" >Panda </button>
+	<button id="puppiesButton" value="Search" >Puppies </button>
+	<p>The list of pictures!</p>
+	<ul id="searchResults" ></ul><br>
+
+	
+</body>
+</html>
