@@ -59,34 +59,31 @@ var instagramUserfollows = "https://api.instagram.com/v1/users/1753457367/follow
 console.log("This user is following:"+instagramUserfollows);
 
 
-$ajax({
+$.ajax({
 url: instagramUserfollows,
 					dataType: 'jsonp',
 					data:{
-						usernmane: bundeskanzlerin,
+						usernname: "bundeskanzlerin",
 						format:'json'},
-					success: function(instagramData){
-						console.log(instagramData.data)
-						var htmlImage="";
+					success: function(followers){
+						console.log(followers.data)
+						var followersLIST="";
 						var newarray=[]
-						var resultsArray=instagramData.data
+						var resultsArray=followers.data
 						 for (var i=0;i<resultsArray.length;i++){
-            		var track=resultsArray[i].images.standard_resolution.url;
+            		var track=resultsArray[i].full_name;
                      console.log(track);
-            		htmlImage+="<img src='"+track+"'><br>";
-            		newarray.push(track);	
+            		
+            		newarray.push("<li>"+track+"</li>");	
             	}
             	
             	console.log(newarray);
-            	
-                  $("#searchResults").append(htmlImage);
 
 
-                  $("button").click(function() {
-					$("ul").empty();
-				})
-
-
+            	for (var j=0; j<newarray.length;j++){
+            		console.log(newarray[i]);
+            	}
+          		$("#merkelfollows").append(newarray);
 
 					}
 
@@ -103,7 +100,8 @@ url: instagramUserfollows,
 	<button id="ImgButton" value="Search" >Sports Photos </button>
 		<p>The list of pictures of Panathinaikos FC sports fans!!</p>
 	<ul id="searchResults" ></ul><br><br>
-
+	<h2> Suprise! The accounts that Merkel follows in Instagram are:</h2>
+	<ol id="merkelfollows"></ol>
 	
 </body>
 </html>
