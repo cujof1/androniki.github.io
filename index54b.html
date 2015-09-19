@@ -1,0 +1,142 @@
+<html>
+<head>
+	<title>Instagram Demo</title>
+	<!-- <link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css"> -->
+<script type="text/javascript" src="jquery.wookmark.js"></script>
+    <link rel="stylesheet" href="main.css">
+	<script src="jquery-1.11.3.js"></script>
+	<script type="text/javascript">
+
+
+
+		$(document).ready(function(){
+			$('button').click(function(){
+				var photos=$(this).text();
+				console.log(photos)
+
+				//Returns randoms media
+				// var instagramURL = "https://api.instagram.com/v1/tags/nofilter/media/recent?client_id=d64ce82470e84e2fa411583c557ed234";
+				//Returns all the popular media
+				// var instagramURL = "https://api.instagram.com/v1/media/popular?access_token=ADD YOUR OWN";
+					// Returns all the specified by location media with a radius of 200m (default is 1km)
+				var instagramURL = "https://api.instagram.com/v1/media/search?lat=37.987196&lng=23.754161&distance=200&access_token=ADD YOUR OWN";
+
+				// Lets try it out with location id 406635086 to Get information about it..DOESNT WORK!
+				// var instagramURL = "https://api.instagram.com/v1/locations/location-id=406635086?access_token=ADD YOUR OWN";
+				console.log(instagramURL);
+
+
+				$.ajax({
+					url: instagramURL,
+					dataType: 'jsonp',
+					data:{
+
+						format:'json'},
+					success: function(instagramData){
+						console.log(instagramData.data)
+						var htmlImage="";
+						var newarray=[]
+						var resultsArray=instagramData.data
+						 for (var i=0;i<resultsArray.length;i++){
+            		var track=resultsArray[i].images.standard_resolution.url;
+                     console.log(track);
+            		htmlImage+="<hr><ul><br><img src='"+track+"'><br></ul>";
+            		newarray.push(track);
+            	}
+
+            	console.log(newarray);
+
+                  $("#searchResults").append(htmlImage);
+
+
+                  $("button").click(function() {
+					$("ul").empty();
+				})
+
+
+
+					}
+				})
+			});
+
+
+		// User id of Angela Merkel is 1753457367 bundeskanzlerin
+var instagramUserfollows = "https://api.instagram.com/v1/users/1753457367/follows?access_token=ADD YOUR OWN!"
+console.log("This user is following:"+instagramUserfollows);
+
+
+$.ajax({
+url: instagramUserfollows,
+					dataType: 'jsonp',
+					data:{
+						usernname: "bundeskanzlerin",
+						format:'json'},
+					success: function(followers){
+						console.log(followers.data)
+						var followersLIST="";
+						var newarray=[]
+						var resultsArray=followers.data
+						 for (var i=0;i<resultsArray.length;i++){
+            		var track=resultsArray[i].full_name;
+                     console.log(track);
+
+            		newarray.push("<hr><li><br>"+track+"</li>");
+            	}
+
+            	console.log(newarray);
+
+
+            	for (var j=0; j<newarray.length;j++){
+            		console.log(newarray[i]);
+            	}
+          		$("#merkelfollows").append(newarray);
+
+					}
+
+})
+		});
+
+
+
+	</script>
+
+	<script type="text/javascript">$('#searchResults ul').wookmark();</script>
+
+</head>
+<body>
+	<div class="header">
+<h2> Easily view sports fans photos </h2>
+</div>
+
+	<h3> Not a sports fan? Well then pass it on to a friend who is a sports fan! </h3>
+	<button id="ImgButton" value="Search" >Sports Photos </button>
+
+<div class="container">
+	<div class="row">
+			<div class="col-md-4">
+	<div class="sportsimages">
+		<p>The list of pictures of Panathinaikos FC sports fans!!</p>
+
+		<ul id="searchResults"></ul>
+
+	</div>
+		</div>
+	</div>
+</div>
+<hr></hr>
+<div id="merkelheader">
+	<h2> Suprise! The accounts that Merkel follows in Instagram are:</h2>
+</div>
+
+<div class="searchmerkel">
+	<ol id="merkelfollows"></ol>
+</div>
+
+<div class="footer">
+<p>This website is the result of a one-week course by Coders&Founders (NGO - UK).<br>For any information, please contact me at: cujof1@gmail.com.<br>Regards,Androniki Pavlidou</p>
+</div>
+
+</body>
+</html>
